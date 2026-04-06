@@ -1,4 +1,4 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application as ExpressApplication, Request, Response } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import { DatabaseManager } from './config/database';
@@ -9,8 +9,8 @@ import { SiteController } from './controllers/SiteController';
 import { AuthController } from './controllers/AuthController';
 import { PostController } from './controllers/PostController';
 
-export class Application {
-  private app: Application;
+export class ApplicationClass {
+  private app: ExpressApplication;
   private viewEngine: ViewEngine;
   private router: Router;
   private port: number;
@@ -99,19 +99,22 @@ export class Application {
 }
 
 // Export singleton instance
-let appInstance: Application | null = null;
+let appInstance: ApplicationClass | null = null;
 
-export function createApp(port?: number): Application {
+export function createApp(port?: number): ApplicationClass {
   if (!appInstance) {
-    appInstance = new Application(port);
+    appInstance = new ApplicationClass(port);
     appInstance.initialize();
   }
   return appInstance;
 }
 
-export function getApp(): Application {
+export function getApp(): ApplicationClass {
   if (!appInstance) {
     throw new Error('Application not initialized. Call createApp() first.');
   }
   return appInstance;
 }
+
+// Also export as Application for backward compatibility
+export const Application = ApplicationClass;

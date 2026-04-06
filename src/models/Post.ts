@@ -16,7 +16,7 @@ export class Post extends ActiveRecord {
   }
 
   static findByAuthor(authorId: number): Post[] {
-    return this.findAll({ author_id }, 'created_at DESC') as Post[];
+    return this.findAll({ author_id: authorId }, 'created_at DESC') as Post[];
   }
 
   static findPublished(): Post[] {

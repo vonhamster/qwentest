@@ -1,9 +1,14 @@
 {
-  "name": "workspace",
+  "name": "yii2-typescript-analog",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Yii2-like MVC framework in TypeScript with SQLite, REST API, JWT auth, and Bootstrap 5",
+  "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "watch": "tsc --watch",
+    "migrate": "ts-node src/models/migrate.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
