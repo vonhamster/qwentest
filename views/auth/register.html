@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white text-center">
+                <h4 class="mb-0">Register</h4>
+            </div>
+            <div class="card-body">
+                {{#errors.general}}
+                <div class="alert alert-danger" role="alert">
+                    {{errors.general}}
+                </div>
+                {{/errors.general}}
+                
+                <form action="/auth/register" method="POST">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control {{#errors.username}}is-invalid{{/errors.username}}" 
+                               id="username" name="username" required autofocus>
+                        {{#errors.username}}
+                        <div class="invalid-feedback">{{errors.username}}</div>
+                        {{/errors.username}}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control {{#errors.email}}is-invalid{{/errors.email}}" 
+                               id="email" name="email" required>
+                        {{#errors.email}}
+                        <div class="invalid-feedback">{{errors.email}}</div>
+                        {{/errors.email}}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control {{#errors.password}}is-invalid{{/errors.password}}" 
+                               id="password" name="password" required minlength="6">
+                        {{#errors.password}}
+                        <div class="invalid-feedback">{{errors.password}}</div>
+                        {{/errors.password}}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password_confirm" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control {{#errors.password_confirm}}is-invalid{{/errors.password_confirm}}" 
+                               id="password_confirm" name="password_confirm" required minlength="6">
+                        {{#errors.password_confirm}}
+                        <div class="invalid-feedback">{{errors.password_confirm}}</div>
+                        {{/errors.password_confirm}}
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">Register</button>
+                    </div>
+                </form>
+                
+                <hr>
+                
+                <div class="text-center">
+                    <p class="mb-0">Already have an account?</p>
+                    <a href="/auth/login" class="btn btn-outline-secondary">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
