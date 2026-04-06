@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-5 mb-4">All Posts</h1>
+        
+        {{#currentUser}}
+        <div class="mb-4">
+            <a href="/posts/create" class="btn btn-success">
+                <span class="me-2">+</span> Create New Post
+            </a>
+        </div>
+        {{/currentUser}}
+    </div>
+</div>
+
+<div class="row">
+    {{#posts}}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h3 class="h5 card-title">
+                    <a href="/posts/{{id}}" class="text-decoration-none">{{title}}</a>
+                </h3>
+                <p class="card-text text-muted small">
+                    Posted on {{created_at}}
+                </p>
+                <p class="card-text">{{content}}</p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <a href="/posts/{{id}}" class="btn btn-outline-primary btn-sm">Read More</a>
+            </div>
+        </div>
+    </div>
+    {{/posts}}
+    
+    {{^posts}}
+    <div class="col-12">
+        <div class="alert alert-info">
+            No posts found. Be the first to create one!
+        </div>
+    </div>
+    {{/posts}}
+</div>
