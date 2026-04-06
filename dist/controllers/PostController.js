@@ -7,13 +7,14 @@ const AuthMiddleware_1 = require("../middlewares/AuthMiddleware");
 class PostController extends Controller_1.Controller {
     getRoutes() {
         return [
-            { method: 'GET', path: '/posts', action: 'index' },
-            { method: 'GET', path: '/posts/:id', action: 'view' },
             { method: 'GET', path: '/posts/create', action: 'create', middleware: [AuthMiddleware_1.AuthMiddleware.requireAuth] },
+            { method: 'GET', path: '/posts', action: 'index' },
+            { method: 'GET', path: '/posts/:id/view', action: 'view' },
             { method: 'POST', path: '/posts', action: 'store', middleware: [AuthMiddleware_1.AuthMiddleware.requireAuth] },
             { method: 'GET', path: '/posts/:id/update', action: 'updateForm', middleware: [AuthMiddleware_1.AuthMiddleware.requireAuth] },
             { method: 'PUT', path: '/posts/:id', action: 'update', middleware: [AuthMiddleware_1.AuthMiddleware.requireAuth] },
             { method: 'DELETE', path: '/posts/:id', action: 'delete', middleware: [AuthMiddleware_1.AuthMiddleware.requireAuth] },
+            { method: 'GET', path: '/posts/:id', action: 'view' },
         ];
     }
     async index() {
