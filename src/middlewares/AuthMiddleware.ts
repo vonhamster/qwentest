@@ -22,7 +22,7 @@ export class AuthMiddleware {
       if (!authHeader || !authHeader.startsWith('Bearer ')) {
         // For web requests, check session or redirect to login
         if (req.session && req.session.userId) {
-          const user = User.findById(req.session.userId);
+          const user = User.findById(req.session.userId) as User | null;
           if (user) {
             req.user = {
               id: user.id!,
@@ -37,7 +37,7 @@ export class AuthMiddleware {
         const token = req.cookies?.token;
         if (token) {
           const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
-          const user = User.findById(decoded.userId);
+          const user = User.findById(decoded.userId) as User | null;
           if (user) {
             req.user = {
               id: user.id!,
@@ -62,7 +62,7 @@ export class AuthMiddleware {
       const token = authHeader.substring(7);
       const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
       
-      const user = User.findById(decoded.userId);
+      const user = User.findById(decoded.userId) as User | null;
       if (!user) {
         res.status(401).json({ error: 'User not found' });
         return;
@@ -88,7 +88,7 @@ export class AuthMiddleware {
         const token = authHeader.substring(7);
         const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
         
-        const user = User.findById(decoded.userId);
+        const user = User.findById(decoded.userId) as User | null;
         if (user) {
           req.user = {
             id: user.id!,
@@ -100,7 +100,7 @@ export class AuthMiddleware {
         const token = req.cookies.token;
         const decoded = jwt.verify(token, JWT_SECRET) as { userId: number };
         
-        const user = User.findById(decoded.userId);
+        const user = User.findById(decoded.userId) as User | null;
         if (user) {
           req.user = {
             id: user.id!,

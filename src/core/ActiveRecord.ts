@@ -33,7 +33,7 @@ export class ActiveRecord {
     return this.tableName;
   }
 
-  static findOne(condition: Record<string, any>): this | null {
+  static findOne(condition: Record<string, any>): ActiveRecord | null {
     const table = this.getTableName();
     const keys = Object.keys(condition);
     const values = Object.values(condition);
@@ -50,7 +50,7 @@ export class ActiveRecord {
     return row ? new this(row as Record<string, any>) : null;
   }
 
-  static findAll(condition?: Record<string, any>, orderBy?: string, limit?: number): this[] {
+  static findAll(condition?: Record<string, any>, orderBy?: string, limit?: number): ActiveRecord[] {
     const table = this.getTableName();
     let query = `SELECT * FROM ${table}`;
     const values: any[] = [];
@@ -75,7 +75,7 @@ export class ActiveRecord {
     return rows.map(row => new this(row as Record<string, any>));
   }
 
-  static findById(id: number): this | null {
+  static findById(id: number): ActiveRecord | null {
     return this.findOne({ id });
   }
 

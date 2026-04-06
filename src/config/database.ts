@@ -1,6 +1,6 @@
 import Database from 'better-sqlite3';
 import path from 'path';
-import { ActiveRecord } from './core/ActiveRecord';
+import { ActiveRecord } from '../core/ActiveRecord';
 
 export class DatabaseManager {
   private static instance: DatabaseManager;

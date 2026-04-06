@@ -26,8 +26,8 @@ export class PostController extends Controller {
   }
 
   async view(): Promise<void> {
-    const id = parseInt(this.request.params.id);
-    const post = Post.findById(id);
+    const id = parseInt(this.request.params.id as string);
+    const post = Post.findById(id) as Post | null;
     
     if (!post) {
       this.response.status(404).send('Post not found');
@@ -77,7 +77,7 @@ export class PostController extends Controller {
   }
 
   async updateForm(): Promise<void> {
-    const id = parseInt(this.request.params.id);
+    const id = parseInt(this.request.params.id as string);
     const post = Post.findById(id);
     
     if (!post) {
@@ -95,8 +95,8 @@ export class PostController extends Controller {
   }
 
   async update(): Promise<void> {
-    const id = parseInt(this.request.params.id);
-    const post = Post.findById(id);
+    const id = parseInt(this.request.params.id as string);
+    const post = Post.findById(id) as Post | null;
     
     if (!post) {
       this.response.status(404).json({ error: 'Post not found' });
@@ -133,8 +133,8 @@ export class PostController extends Controller {
   }
 
   async delete(): Promise<void> {
-    const id = parseInt(this.request.params.id);
-    const post = Post.findById(id);
+    const id = parseInt(this.request.params.id as string);
+    const post = Post.findById(id) as Post | null;
     
     if (!post) {
       this.response.status(404).json({ error: 'Post not found' });
