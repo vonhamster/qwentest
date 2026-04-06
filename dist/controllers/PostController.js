@@ -22,7 +22,9 @@ class PostController extends Controller_1.Controller {
         this.render('post/index', {
             title: 'All Posts',
             posts: posts.map(p => p.toJSON()),
-            currentUser: this.request.user
+            currentUser: this.request.user,
+            isPosts: true,
+            showFab: true
         });
     }
     async view() {
@@ -35,7 +37,9 @@ class PostController extends Controller_1.Controller {
         this.render('post/view', {
             title: post.title,
             post: post.toJSON(),
-            currentUser: this.request.user
+            currentUser: this.request.user,
+            isPosts: true,
+            showFab: false
         });
     }
     async create() {
@@ -44,7 +48,9 @@ class PostController extends Controller_1.Controller {
             post: { title: '', content: '' },
             action: '/posts',
             method: 'POST',
-            currentUser: this.request.user
+            currentUser: this.request.user,
+            isPosts: true,
+            showFab: false
         });
     }
     async store() {
@@ -66,7 +72,9 @@ class PostController extends Controller_1.Controller {
                 action: '/posts',
                 method: 'POST',
                 error: 'Failed to create post',
-                currentUser: req.user
+                currentUser: req.user,
+                isPosts: true,
+                showFab: false
             });
         }
     }
@@ -82,7 +90,9 @@ class PostController extends Controller_1.Controller {
             post: post.toJSON(),
             action: `/posts/${id}`,
             method: 'PUT',
-            currentUser: this.request.user
+            currentUser: this.request.user,
+            isPosts: true,
+            showFab: false
         });
     }
     async update() {
@@ -117,7 +127,9 @@ class PostController extends Controller_1.Controller {
                     action: `/posts/${id}`,
                     method: 'PUT',
                     error: 'Failed to update post',
-                    currentUser: this.request.user
+                    currentUser: this.request.user,
+                    isPosts: true,
+                    showFab: false
                 });
             }
         }

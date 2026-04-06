@@ -17,20 +17,26 @@ class SiteController extends Controller_1.Controller {
         this.render('site/index', {
             title: 'Home',
             posts: posts.map(p => p.toJSON()),
-            currentUser: this.request.user
+            currentUser: this.request.user,
+            isHome: true,
+            showFab: true
         });
     }
     async about() {
         this.render('site/about', {
             title: 'About Us',
-            currentUser: this.request.user
+            currentUser: this.request.user,
+            isAbout: true,
+            showFab: false
         });
     }
     async contact() {
         this.render('site/contact', {
             title: 'Contact',
             message: '',
-            currentUser: this.request.user
+            currentUser: this.request.user,
+            isContact: true,
+            showFab: false
         });
     }
     async contactSubmit() {
@@ -40,7 +46,9 @@ class SiteController extends Controller_1.Controller {
         this.render('site/contact', {
             title: 'Contact',
             message: 'Thank you for contacting us! We will get back to you soon.',
-            currentUser: this.request.user
+            currentUser: this.request.user,
+            isContact: true,
+            showFab: false
         });
     }
 }

@@ -1,34 +1,38 @@
 <div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">{{title}}</h4>
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white border-0 py-3">
+                <h4 class="mb-0"><i class="bi bi-pencil-square me-2"></i>{{title}}</h4>
             </div>
-            <div class="card-body">
+            <div class="card-body p-4">
                 {{#error}}
                 <div class="alert alert-danger" role="alert">
-                    {{error}}
+                    <i class="bi bi-exclamation-triangle me-2"></i>{{error}}
                 </div>
                 {{/error}}
                 
                 <form action="{{action}}" method="POST">
                     <input type="hidden" name="_method" value="{{method}}">
                     
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" 
-                               value="{{post.title}}" required autofocus>
+                        <input type="text" class="form-control touch-target" id="title" name="title" 
+                               value="{{post.title}}" required autofocus placeholder="Enter post title">
                     </div>
                     
-                    <div class="mb-3">
+                    <div class="mb-4">
                         <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control" id="content" name="content" 
-                                  rows="10" required>{{post.content}}</textarea>
+                        <textarea class="form-control touch-target" id="content" name="content" 
+                                  rows="8" required placeholder="Write your content here...">{{post.content}}</textarea>
                     </div>
                     
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="/posts" class="btn btn-outline-secondary">Cancel</a>
-                        <button type="submit" class="btn btn-primary">Save Post</button>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg touch-target">
+                            <i class="bi bi-check-lg me-2"></i>Save Post
+                        </button>
+                        <a href="/posts" class="btn btn-outline-secondary touch-target">
+                            <i class="bi bi-arrow-left me-2"></i>Cancel
+                        </a>
                     </div>
                 </form>
             </div>

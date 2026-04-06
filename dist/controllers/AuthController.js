@@ -22,7 +22,8 @@ class AuthController extends Controller_1.Controller {
         }
         this.render('auth/login', {
             title: 'Login',
-            error: ''
+            error: '',
+            showFab: false
         });
     }
     async loginSubmit() {
@@ -31,7 +32,8 @@ class AuthController extends Controller_1.Controller {
         if (!user || !user.validatePassword(password)) {
             this.render('auth/login', {
                 title: 'Login',
-                error: 'Invalid username or password'
+                error: 'Invalid username or password',
+                showFab: false
             });
             return;
         }
@@ -60,7 +62,8 @@ class AuthController extends Controller_1.Controller {
         }
         this.render('auth/register', {
             title: 'Register',
-            errors: {}
+            errors: {},
+            showFab: false
         });
     }
     async registerSubmit() {
@@ -89,7 +92,8 @@ class AuthController extends Controller_1.Controller {
         if (Object.keys(errors).length > 0) {
             this.render('auth/register', {
                 title: 'Register',
-                errors
+                errors,
+                showFab: false
             });
             return;
         }
@@ -120,7 +124,8 @@ class AuthController extends Controller_1.Controller {
         else {
             this.render('auth/register', {
                 title: 'Register',
-                errors: { general: 'Failed to create account' }
+                errors: { general: 'Failed to create account' },
+                showFab: false
             });
         }
     }
@@ -136,7 +141,9 @@ class AuthController extends Controller_1.Controller {
         const req = this.request;
         this.render('auth/profile', {
             title: 'Profile',
-            user: req.user
+            user: req.user,
+            isProfile: true,
+            showFab: false
         });
     }
 }
