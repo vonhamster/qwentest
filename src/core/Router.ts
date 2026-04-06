@@ -25,17 +25,19 @@ export class Router {
       
       const handler = async (req: Request, res: Response) => {
         try {
-          // Create fresh controller instance with actual req/res
-          const ctrl = new controllerClass(req, res);
-          
-          // Apply middleware if specified
+          // Apply middleware if specified BEFORE creating controller
           if (route.middleware) {
             for (const mw of route.middleware) {
               await new Promise<void>((resolve, reject) => {
                 mw(req, res, () => resolve());
+              }).catch((error) => {
+                throw error;
               });
             }
           }
+          
+          // Create fresh controller instance with actual req/res AFTER middleware
+          const ctrl = new controllerClass(req, res);
           
           // Call the action method
           const actionMethod = route.action as keyof Controller;

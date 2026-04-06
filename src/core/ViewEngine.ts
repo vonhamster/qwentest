@@ -52,8 +52,59 @@ export class ViewEngine {
   }
 
   private parseTemplate(template: string, data: Record<string, any>): string {
+    let result = template;
+    
+    // Process inverted sections {{^variable}}...{{/variable}} (shows content if variable is falsy)
+    const invertedSectionRegex = /\{\{\s*\^([^}]+)\s*\}\}([\s\S]*?)\{\{\s*\/\1\s*\}\}/g;
+    result = result.replace(invertedSectionRegex, (match, variable, content) => {
+      const keys = variable.trim().split('.');
+      let value: any = data;
+      
+      for (const key of keys) {
+        if (value !== undefined && value !== null) {
+          value = value[key];
+        } else {
+          value = undefined;
+          break;
+        }
+      }
+      
+      // If value is falsy (undefined, null, false, 0, empty string), show content
+      if (!value) {
+        return this.parseTemplate(content, data);
+      }
+      return '';
+    });
+    
+    // Process sections {{#variable}}...{{/variable}} (shows content if variable is truthy)
+    const sectionRegex = /\{\{\s*#([^}]+)\s*\}\}([\s\S]*?)\{\{\s*\/\1\s*\}\}/g;
+    result = result.replace(sectionRegex, (match, variable, content) => {
+      const keys = variable.trim().split('.');
+      let value: any = data;
+      
+      for (const key of keys) {
+        if (value !== undefined && value !== null) {
+          value = value[key];
+        } else {
+          value = undefined;
+          break;
+        }
+      }
+      
+      // If value is truthy, show content
+      if (value) {
+        return this.parseTemplate(content, data);
+      }
+      return '';
+    });
+    
     // Simple template engine - replace {{ variable }} with actual values
-    return template.replace(/\{\{\s*([^}]+)\s*\}\}/g, (match, variable) => {
+    result = result.replace(/\{\{\s*([^}]+)\s*\}\}/g, (match, variable) => {
+      // Skip if this looks like a section marker (already processed)
+      if (variable.startsWith('#') || variable.startsWith('^') || variable.startsWith('/')) {
+        return match;
+      }
+      
       const keys = variable.trim().split('.');
       let value: any = data;
       
@@ -68,6 +119,8 @@ export class ViewEngine {
       
       return value !== undefined ? String(value) : '';
     });
+    
+    return result;
   }
 
   renderPartial(partial: string, data: Record<string, any> = {}): string {

@@ -2,56 +2,9 @@
 # Dependencies
 node_modules/
 
-# Build outputs
-dist/
-build/
-target/
+# Database
+data/app.db
 
 # Logs
 *.log
-
-# Environment variables
-.env
-.env.local
-*.env.*
-
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
-*.tmp
-
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-venv/
-.venv/
-.env
-
-# Coverage
-coverage/
-htmlcov/
-.coverage
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Compiled files
-*.o
-*.obj
-*.exe
-*.dll
-*.so
-*.a
-*.out
-
-# Cache
-.mypy_cache/
-.pytest_cache/
-.gradle/
 ```
