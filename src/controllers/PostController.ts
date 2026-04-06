@@ -22,7 +22,9 @@ export class PostController extends Controller {
     this.render('post/index', { 
       title: 'All Posts',
       posts: posts.map(p => p.toJSON()),
-      currentUser: (this.request as AuthRequest).user
+      currentUser: (this.request as AuthRequest).user,
+      isPosts: true,
+      showFab: true
     });
   }
 
@@ -38,7 +40,9 @@ export class PostController extends Controller {
     this.render('post/view', { 
       title: post.title,
       post: post.toJSON(),
-      currentUser: (this.request as AuthRequest).user
+      currentUser: (this.request as AuthRequest).user,
+      isPosts: true,
+      showFab: false
     });
   }
 
@@ -48,7 +52,9 @@ export class PostController extends Controller {
       post: { title: '', content: '' },
       action: '/posts',
       method: 'POST',
-      currentUser: (this.request as AuthRequest).user
+      currentUser: (this.request as AuthRequest).user,
+      isPosts: true,
+      showFab: false
     });
   }
 
@@ -72,7 +78,9 @@ export class PostController extends Controller {
         action: '/posts',
         method: 'POST',
         error: 'Failed to create post',
-        currentUser: req.user
+        currentUser: req.user,
+        isPosts: true,
+        showFab: false
       });
     }
   }
@@ -91,7 +99,9 @@ export class PostController extends Controller {
       post: post.toJSON(),
       action: `/posts/${id}`,
       method: 'PUT',
-      currentUser: (this.request as AuthRequest).user
+      currentUser: (this.request as AuthRequest).user,
+      isPosts: true,
+      showFab: false
     });
   }
 
@@ -127,7 +137,9 @@ export class PostController extends Controller {
           action: `/posts/${id}`,
           method: 'PUT',
           error: 'Failed to update post',
-          currentUser: (this.request as AuthRequest).user
+          currentUser: (this.request as AuthRequest).user,
+          isPosts: true,
+          showFab: false
         });
       }
     }

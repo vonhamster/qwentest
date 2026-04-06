@@ -18,14 +18,18 @@ export class SiteController extends Controller {
     this.render('site/index', { 
       title: 'Home',
       posts: posts.map(p => p.toJSON()),
-      currentUser: (this.request as AuthRequest).user
+      currentUser: (this.request as AuthRequest).user,
+      isHome: true,
+      showFab: true
     });
   }
 
   async about(): Promise<void> {
     this.render('site/about', { 
       title: 'About Us',
-      currentUser: (this.request as AuthRequest).user
+      currentUser: (this.request as AuthRequest).user,
+      isAbout: true,
+      showFab: false
     });
   }
 
@@ -33,7 +37,9 @@ export class SiteController extends Controller {
     this.render('site/contact', { 
       title: 'Contact',
       message: '',
-      currentUser: (this.request as AuthRequest).user
+      currentUser: (this.request as AuthRequest).user,
+      isContact: true,
+      showFab: false
     });
   }
 
@@ -46,7 +52,9 @@ export class SiteController extends Controller {
     this.render('site/contact', { 
       title: 'Contact',
       message: 'Thank you for contacting us! We will get back to you soon.',
-      currentUser: (this.request as AuthRequest).user
+      currentUser: (this.request as AuthRequest).user,
+      isContact: true,
+      showFab: false
     });
   }
 }
