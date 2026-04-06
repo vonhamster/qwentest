@@ -6,13 +6,14 @@ import { AuthMiddleware, AuthRequest } from '../middlewares/AuthMiddleware';
 export class PostController extends Controller {
   getRoutes(): RouteConfig[] {
     return [
-      { method: 'GET', path: '/posts', action: 'index' },
-      { method: 'GET', path: '/posts/:id', action: 'view' },
       { method: 'GET', path: '/posts/create', action: 'create', middleware: [AuthMiddleware.requireAuth] },
+      { method: 'GET', path: '/posts', action: 'index' },
+      { method: 'GET', path: '/posts/:id/view', action: 'view' },
       { method: 'POST', path: '/posts', action: 'store', middleware: [AuthMiddleware.requireAuth] },
       { method: 'GET', path: '/posts/:id/update', action: 'updateForm', middleware: [AuthMiddleware.requireAuth] },
       { method: 'PUT', path: '/posts/:id', action: 'update', middleware: [AuthMiddleware.requireAuth] },
       { method: 'DELETE', path: '/posts/:id', action: 'delete', middleware: [AuthMiddleware.requireAuth] },
+      { method: 'GET', path: '/posts/:id', action: 'view' },
     ];
   }
 

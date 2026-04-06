@@ -1,10 +1,11 @@
 ```
-# Dependencies
-node_modules/
+# Build artifacts
+dist/
+build/
+*.d.ts.map
+*.js.map
 
-# Database
-data/app.db
-
-# Logs
-*.log
+# Database files
+*.db-shm
+*.db-wal
 ```
